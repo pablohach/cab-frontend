@@ -9,9 +9,19 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import MenuItem, { MenuItemProps } from './MenuItem.vue';
+import useSubMenuConfig from './useMenuConfig';
 
+const { subMenuConfig } = useSubMenuConfig();
+
+/*********************************************************
+ *************   MENU PRINCIPAL   *************************
+ **********************************************************/
 const menuItems = computed((): MenuItemProps[] => {
   let items: MenuItemProps[] = [];
+
+  if (subMenuConfig.value) {
+    items.push(subMenuConfig.value);
+  }
 
   items.push({
     title: 'Home',
@@ -48,6 +58,10 @@ const menuItems = computed((): MenuItemProps[] => {
         ],
       },
     ],
+  } as MenuItemProps);
+
+  items.push({
+    title: '-item',
   } as MenuItemProps);
 
   items.push({

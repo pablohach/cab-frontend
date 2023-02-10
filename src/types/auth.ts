@@ -6,16 +6,14 @@ export interface Role {
 }
 
 export interface UserBasic {
-  id: number;
-  username: string;
-  name: string;
-  surname: string;
+  id_usuario: number;
+  login: string;
+  nombre: string;
   email: string;
 }
 
 export interface User extends UserBasic {
-  date_from: string;
-  date_to: string | undefined;
+  habilitado: number;
   roles: Role[];
   isActive: boolean;
 }

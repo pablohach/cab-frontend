@@ -11,8 +11,9 @@
   </q-item> -->
 
   <div v-if="children.length == 0">
-    <!-- Nodo con link -->
+    <!-- Nodo con link o separator (- | -item) -->
     <q-item
+      v-if="!['-', '-item'].includes(title)"
       :clickable="!!link || !!router_link"
       exact
       tag="a"
@@ -30,6 +31,7 @@
         <q-item-label caption>{{ caption }}</q-item-label>
       </q-item-section>
     </q-item>
+    <q-separator v-else :inset="title === '-' ? true : 'item'" />
   </div>
   <div v-else>
     <!-- {{children}} -->

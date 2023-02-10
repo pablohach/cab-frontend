@@ -6,13 +6,22 @@ const routes: RouteRecordRaw[] = [
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', name: 'Home', component: () => import('pages/IndexPage.vue') },
+      { path: '', name: 'Home', component: () => import('../pages/IndexPage.vue') },
       {
         path: '/auth/login',
         name: 'Login',
         component: () => import('../pages/auth/LoginPage.vue'),
         props: true,
       },
+
+      // TODO: borrar, es de prueba
+      {
+        path: '/',
+        name: 'ForgotPass',
+        component: () => import('../pages/IndexPage.vue'),
+      },
+
+
       // {
       //   path: '/auth/change-pass',
       //   name: 'ChangePass',
