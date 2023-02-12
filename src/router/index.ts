@@ -37,7 +37,6 @@ export default route(function (/* { store, ssrContext } */) {
 
 
   Router.beforeEach((to, from, next) => {
-    console.log('to:', to.fullPath);
     // Saco permisos y roles de LocalStorage, ya que acá no puedo injectar auth para obtener urrentUser
     const { loggedIn, hasRole, hasPermission } = useLocalStorage();
     if (to.meta.requiresPermission || to.meta.requiresRole) {

@@ -36,7 +36,7 @@
               push
               no-caps
               dark
-              :label="!currentUser ? 'Login' : currentUser.username"
+              :label="!currentUser ? 'Login' : currentUser.login"
               :icon="!currentUser ? 'login' : 'person'"
               @click="onLoginLogoutClick"
             >
@@ -100,7 +100,6 @@ const toggleLeftDrawer = () => {
 };
 
 const onLoginLogoutClick = () => {
-  console.log(currentUser.value);
   router.push({ name: !currentUser.value ? 'Login' : 'Profile' });
 };
 </script>

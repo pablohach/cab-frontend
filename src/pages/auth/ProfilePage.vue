@@ -10,7 +10,7 @@
     </q-card-section>
 
     <q-card-section>
-      <q-splitter v-model="splitterModel" style="height: 250px">
+      <q-splitter v-model="splitterModel" :limits="[10, 25]">
         <template v-slot:before>
           <q-tabs v-model="tab" vertical class="text-grey" active-color="primary">
             <q-tab name="data" label="USUARIO" icon="person" />
@@ -62,7 +62,7 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import useAuth from '../../composables/useAuth';
 const tab = ref('data');
-const splitterModel = ref(20);
+const splitterModel = ref(15);
 const { currentUser, logout } = useAuth();
 const router = useRouter();
 

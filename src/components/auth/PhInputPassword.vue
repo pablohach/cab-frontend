@@ -61,7 +61,6 @@
 import { ref, reactive } from 'vue';
 import { QInput } from 'quasar';
 
-//const emit = defineEmits(['update:modelValue']);
 defineEmits(['update:modelValue']);
 
 interface Props {

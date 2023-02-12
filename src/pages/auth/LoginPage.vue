@@ -76,7 +76,6 @@ const model = ref<LoginFormData>({
 });
 
 const handleLogin = () => {
-  console.log('Submit', model.value.username, model.value.password);
   $q.loading.show();
   message.value = '';
 

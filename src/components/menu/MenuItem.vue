@@ -1,24 +1,14 @@
 <template>
-  <!-- <q-item clickable tag="a" :to="{ name: to }" :href="link" :target="target">
-    <q-item-section v-if="icon" avatar>
-      <q-icon :name="icon" />
-    </q-item-section>
-
-    <q-item-section>
-      <q-item-label>{{ title }}</q-item-label>
-      <q-item-label caption>{{ caption }}</q-item-label>
-    </q-item-section>
-  </q-item> -->
-
   <div v-if="children.length == 0">
     <!-- Nodo con link o separator (- | -item) -->
     <q-item
       v-if="!['-', '-item'].includes(title)"
-      :clickable="!!link || !!router_link"
+      :clickable="!!link || !!router_link || !!onClick"
       exact
       tag="a"
       :to="router_link"
       :href="link"
+      @click="fnOnClick"
       :target="target"
       :inset-level="level + (icon ? 0 : 1)"
     >
@@ -62,8 +52,10 @@ export interface MenuItemProps {
   icon?: string;
   level?: number;
   children?: MenuItemProps[];
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  onClick?: Function | undefined;
 }
-withDefaults(defineProps<MenuItemProps>(), {
+const props = withDefaults(defineProps<MenuItemProps>(), {
   caption: '',
   icon: '',
   router_link: '',
@@ -71,5 +63,10 @@ withDefaults(defineProps<MenuItemProps>(), {
   target: '_self',
   level: 0,
   children: () => [],
+  onClick: undefined,
 });
+
+const fnOnClick = () => {
+  if (props.onClick) props.onClick();
+};
 </script>
