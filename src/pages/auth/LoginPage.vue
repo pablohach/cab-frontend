@@ -16,18 +16,18 @@
       <q-card-section class="column q-gutter-md">
         <q-input
           label="Usuario *"
-          filled
+          outlined
           autofocus
           v-model="model.username"
           :rules="[(val) => (val && val.length > 0) || 'Usuario es requerido!']"
           @keydown.enter.prevent="passRef?.focus()"
         ></q-input>
 
-        <q-input
+        <!-- <q-input
           ref="passRef"
           label="Clave acceso *"
           :type="isPwd ? 'password' : 'text'"
-          filled
+          outlined
           v-model="model.password"
           :rules="[(val) => (val && val.length > 0) || 'Clave es requerida!']"
         >
@@ -38,7 +38,8 @@
               @click="isPwd = !isPwd"
             />
           </template>
-        </q-input>
+        </q-input> -->
+        <ph-input-password ref="passRef" v-model="model.password"></ph-input-password>
       </q-card-section>
 
       <q-card-actions vertical align="center">
@@ -53,10 +54,11 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
-import useAuth from '../../composables/useAuth';
-import { LoginFormData } from '../../types/auth';
+import useAuth from 'src/composables/useAuth';
+import { LoginFormData } from 'src/types/auth';
+import PhInputPassword from 'src/components/auth/PhInputPassword.vue';
 
-import { useQuasar, QInput } from 'quasar';
+import { useQuasar } from 'quasar';
 
 defineProps<{ info_message?: string }>();
 
@@ -66,17 +68,15 @@ const { login } = useAuth();
 const router = useRouter();
 const route = useRoute();
 const message = ref('');
-const passRef = ref<QInput | null>(null);
+const passRef = ref<typeof PhInputPassword | null>(null);
 
 const model = ref<LoginFormData>({
   username: '',
   password: '',
 });
 
-const isPwd = ref(true);
-
 const handleLogin = () => {
-  console.log('Submit', model.value.username);
+  console.log('Submit', model.value.username, model.value.password);
   $q.loading.show();
   message.value = '';
 

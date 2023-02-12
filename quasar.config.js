@@ -89,10 +89,6 @@ module.exports = configure(function (ctx) {
         API_URL: ctx.dev
           ? 'http://localhost:8888/'
           : 'https://www.piedrasblancasbariloche.ar/',
-        PASSWORD_REGEXP:
-          '/^(?=.*[A-Za-z])(?=.*d)(?=.*[@$!%*#?&+-/=.])[A-Za-zd@$!%*#?&+-/=.]{8,}$/',
-        PASSWORD_MESSAGE:
-          'Debe contener al menos 8 caracteres, una mayúscula, una minúscula, un número y un símbolo.',
       },
     },
 
