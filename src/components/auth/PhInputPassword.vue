@@ -5,7 +5,9 @@
       :label="label"
       :type="isPwd ? 'password' : 'text'"
       outlined
-      v-model="password"
+      :modelValue="modelValue"
+      :value="modelValue"
+      @update:modelValue="(newValue) => $emit('update:modelValue', newValue)"
       :rules="[
         showPasswordCriteria
           ? (val) => validatePassword(val) || 'La clave debe cumplir todos los criterios.'
@@ -56,12 +58,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, watch } from 'vue';
+import { ref, reactive } from 'vue';
 import { QInput } from 'quasar';
 
-const emit = defineEmits(['update:modelValue']);
+//const emit = defineEmits(['update:modelValue']);
+defineEmits(['update:modelValue']);
 
 interface Props {
+  modelValue: string;
   label?: string;
   showPasswordCriteria?: boolean;
   minPasswordLength?: number;
@@ -73,7 +77,6 @@ const prop = withDefaults(defineProps<Props>(), {
   minPasswordLength: 8,
 });
 
-const password = ref('');
 const isPwd = ref(true);
 const passRef = ref<QInput | null>(null);
 
@@ -111,10 +114,6 @@ function validatePassword(password: string): boolean {
     validPassword.symbol
   );
 }
-
-watch(password, (value) => {
-  emit('update:modelValue', value);
-});
 
 const focus = () => {
   passRef.value?.focus();
