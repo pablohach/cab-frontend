@@ -2,6 +2,14 @@ import { RouteRecordRaw } from 'vue-router';
 //import { RolesEnum, PermissionsEnum } from '../enums';
 
 const routes: RouteRecordRaw[] = [
+
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'Notfound',
+    component: () => import('pages/ErrorNotFound.vue'),
+  },
+
+
   {
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
@@ -42,11 +50,11 @@ const routes: RouteRecordRaw[] = [
 
   // Always leave this as last one,
   // but you can also remove it
-  {
-    path: '/:catchAll(.*)*',
-    name: 'Notfound',
-    component: () => import('pages/ErrorNotFound.vue'),
-  },
+  // {
+  //   path: '/:catchAll(.*)*',
+  //   name: 'Notfound',
+  //   component: () => import('pages/ErrorNotFound.vue'),
+  // },
 ];
 
 export default routes;

@@ -53,7 +53,7 @@ module.exports = configure(function (ctx) {
         node: 'node16',
       },
 
-      vueRouterMode: 'hash', // available values: 'hash', 'history'
+      vueRouterMode: 'history', // available values: 'hash', 'history'
       // vueRouterBase,
       // vueDevtools,
       // vueOptionsAPI: false,
@@ -74,7 +74,9 @@ module.exports = configure(function (ctx) {
 
       // vitePlugins: [
       //   [ 'package-name', { ..options.. } ]
-      // ]
+      // ],
+
+      vitePlugins: [['vite-plugin-rewrite-all', {}]],
 
       // Agregado por mi
       //env: require('dotenv').config().parsed, //Para usar variables de entorno del archivo .env
