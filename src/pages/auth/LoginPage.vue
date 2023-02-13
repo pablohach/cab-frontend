@@ -4,7 +4,13 @@
       info_message
     }}</q-banner>
 
-    <q-form @submit="handleLogin">
+    <q-form
+      @submit="handleLogin"
+      autocorrect="off"
+      autocapitalize="off"
+      autocomplete="off"
+      spellcheck="false"
+    >
       <q-card-section>
         <div class="text-h6">Acceso al sistema</div>
         <div class="text-subtitle1">Ingrese las credenciales para autenticarse.</div>
@@ -23,22 +29,6 @@
           @keydown.enter.prevent="passRef?.focus()"
         ></q-input>
 
-        <!-- <q-input
-          ref="passRef"
-          label="Clave acceso *"
-          :type="isPwd ? 'password' : 'text'"
-          outlined
-          v-model="model.password"
-          :rules="[(val) => (val && val.length > 0) || 'Clave es requerida!']"
-        >
-          <template v-slot:append>
-            <q-icon
-              :name="isPwd ? 'visibility_off' : 'visibility'"
-              class="cursor-pointer"
-              @click="isPwd = !isPwd"
-            />
-          </template>
-        </q-input> -->
         <ph-input-password ref="passRef" v-model="model.password"></ph-input-password>
       </q-card-section>
 

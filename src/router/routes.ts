@@ -8,36 +8,27 @@ const routes: RouteRecordRaw[] = [
     children: [
       { path: '', name: 'Home', component: () => import('../pages/IndexPage.vue') },
       {
-        path: '/auth/login',
+        path: '/auth/login/:info_message?',
         name: 'Login',
         component: () => import('../pages/auth/LoginPage.vue'),
         props: true,
       },
-
-      // TODO: borrar, es de prueba
       {
-        path: '/',
-        name: 'ForgotPass',
-        component: () => import('../pages/IndexPage.vue'),
+        path: '/auth/change-pass',
+        name: 'ChangePass',
+        component: () => import('../pages/auth/ChangePassword.vue'),
+        meta: { requiresAuth: true },
       },
-
-
-      // {
-      //   path: '/auth/change-pass',
-      //   name: 'ChangePass',
-      //   component: () => import('../pages/auth/ChangePassword.vue'),
-      //   meta: { requiresAuth: true },
-      // },
-      // {
-      //   path: '/auth/forgot-pass',
-      //   name: 'ForgotPass',
-      //   component: () => import('../pages/auth/ForgotPassword.vue'),
-      // },
-      // {
-      //   path: '/auth/reset-pass/:reset_token',
-      //   name: 'ResetPass',
-      //   component: () => import('../pages/auth/ResetPassword.vue'),
-      // },
+      {
+        path: '/auth/forgot-pass',
+        name: 'ForgotPass',
+        component: () => import('../pages/auth/ForgotPassword.vue'),
+      },
+      {
+        path: '/auth/reset-pass/:reset_token',
+        name: 'ResetPass',
+        component: () => import('../pages/auth/ResetPassword.vue'),
+      },
       {
         path: '/profile',
         name: 'Profile',

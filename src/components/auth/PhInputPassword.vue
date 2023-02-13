@@ -11,7 +11,7 @@
       :rules="[
         showPasswordCriteria
           ? (val) => validatePassword(val) || 'La clave debe cumplir todos los criterios.'
-          : (val) => (val && val.length > 0) || 'Clave es requerida!',
+          : (val) => (val && val.length > 0) || 'Dato requerido.',
       ]"
     >
       <template v-slot:append>
@@ -64,7 +64,7 @@ import { QInput } from 'quasar';
 defineEmits(['update:modelValue']);
 
 interface Props {
-  modelValue: string;
+  modelValue: string | undefined;
   label?: string;
   showPasswordCriteria?: boolean;
   minPasswordLength?: number;
