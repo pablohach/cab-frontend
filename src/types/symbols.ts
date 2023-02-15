@@ -1,5 +1,5 @@
 import { InjectionKey, Ref } from 'vue';
-import { AuthStateStore } from './auth';
+import { AuthStateStore } from '../models/auth';
 
 
 export const AuthStateKey: InjectionKey<Ref<AuthStateStore>> = Symbol('AuthStateStore');

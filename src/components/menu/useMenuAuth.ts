@@ -22,9 +22,8 @@ export default function () {
       childrens.push(
         {
           title: 'Permisos',
-          caption: 'Permisos del usuario',
           icon: 'lock_person',
-          level: 1,
+          level: 2,
           router_link: { name: 'PermissionList' },
         }
       );
@@ -35,9 +34,8 @@ export default function () {
       childrens.push(
         {
           title: 'Roles',
-          caption: 'Roles del usuario',
           icon: 'manage_accounts',
-          level: 1,
+          level: 2,
           router_link: { name: 'RoleList' },
         }
       );
@@ -47,9 +45,8 @@ export default function () {
       childrens.push(
         {
           title: 'Usuarios',
-          caption: 'Usuarios del sistema',
           icon: 'person',
-          level: 1,
+          level: 2,
           router_link: { name: 'UserList' },
         }
       );
@@ -59,8 +56,9 @@ export default function () {
     return childrens.length
       ? {
         title: 'Autenticación',
-        caption: 'Usuarios del sistema',
         icon: 'groups',
+        level: 1,
+        children: childrens
       }
       : null;
 

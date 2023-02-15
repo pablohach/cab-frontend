@@ -39,6 +39,7 @@ export default function () {
         title: 'Configuración',
         caption: '',
         icon: 'settings',
+        children: childrens
       }
       : null;
 

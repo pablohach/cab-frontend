@@ -1,14 +1,7 @@
 import { RouteRecordRaw } from 'vue-router';
-//import { RolesEnum, PermissionsEnum } from '../enums';
+import { RolesEnum, PermissionsEnum } from '../enums';
 
 const routes: RouteRecordRaw[] = [
-
-  {
-    path: '/:pathMatch(.*)*',
-    name: 'Notfound',
-    component: () => import('pages/ErrorNotFound.vue'),
-  },
-
 
   {
     path: '/',
@@ -45,16 +38,43 @@ const routes: RouteRecordRaw[] = [
       },
 
 
+      // AUTHORIZATION
+      {
+        path: '/users',
+        name: 'UserList',
+        component: () => import('../pages/users/UsersPage.vue'),
+        meta: { requiresPermission: PermissionsEnum.USERS_VIEW },
+      },
+      {
+        path: '/permissions',
+        name: 'PermissionList',
+        component: () => import('../pages/users/PermissionsPage.vue'),
+        meta: {
+          requiresPermission: [
+            PermissionsEnum.USERS_PERMISSIONS_VIEW,
+            PermissionsEnum.ROLES_PERMISSIONS_VIEW,
+          ],
+        },
+      },
+      {
+        path: '/roles',
+        name: 'RoleList',
+        component: () => import('../pages/users/RolesPage.vue'),
+        meta: { requiresPermission: PermissionsEnum.ROLES_VIEW },
+      },
+
+
+
     ],
   },
 
   // Always leave this as last one,
   // but you can also remove it
-  // {
-  //   path: '/:catchAll(.*)*',
-  //   name: 'Notfound',
-  //   component: () => import('pages/ErrorNotFound.vue'),
-  // },
+  {
+    path: '/:catchAll(.*)*',
+    name: 'Notfound',
+    component: () => import('pages/ErrorNotFound.vue'),
+  },
 ];
 
 export default routes;

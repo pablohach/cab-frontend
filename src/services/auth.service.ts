@@ -1,5 +1,5 @@
 import { api } from '../boot/axios';
-import { LoginFormData } from '../types/auth';
+import { LoginFormData } from '../models/auth';
 
 const API_ENDPOINT = 'auth/';
 

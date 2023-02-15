@@ -16,7 +16,7 @@
         v-show="message"
         rounded
         dense
-        :class="success ? 'bg-info' : 'bg-warning'"
+        :class="success ? 'alert-info' : 'alert-warning'"
         >{{ message }}</q-banner
       >
 

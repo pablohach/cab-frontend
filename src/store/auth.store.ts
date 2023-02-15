@@ -5,7 +5,7 @@
 import { computed, ref } from 'vue';
 import AuthService from '../services/auth.service';
 import useLocalStorage from '../composables/useLocalStorage';
-import { LoginFormData, LoginResponse, AuthStateStore } from '../types/auth';
+import { LoginFormData, LoginResponse, AuthStateStore } from '../models/auth';
 
 const { getToken, setToken, removeToken } = useLocalStorage();
 

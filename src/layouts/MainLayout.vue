@@ -35,7 +35,6 @@
             <q-btn
               push
               no-caps
-              dark
               :label="!currentUser ? 'Login' : currentUser.login"
               :icon="!currentUser ? 'login' : 'person'"
               @click="onLoginLogoutClick"
@@ -52,7 +51,7 @@
     </q-drawer>
 
     <q-page-container>
-      <router-view />
+      <router-view class="q-ma-sm" />
     </q-page-container>
   </q-layout>
 </template>

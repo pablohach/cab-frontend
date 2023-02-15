@@ -11,11 +11,9 @@
         text-color="blue"
         unelevated
         to="/"
-        label="Go Home"
+        label="Ir al inicio"
         no-caps
       />
     </div>
   </div>
 </template>
-
-<script setup lang="ts"></script>

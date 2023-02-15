@@ -12,7 +12,9 @@
       </q-card-section>
 
       <q-separator inset />
-      <q-banner v-show="message" rounded dense class="bg-warning">{{ message }}</q-banner>
+      <q-banner v-show="message" rounded dense class="alert-warning">{{
+        message
+      }}</q-banner>
 
       <q-card-section class="column q-gutter-md">
         <ph-input-password
@@ -37,7 +39,7 @@
 import { ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import AuthService from 'src/services/auth.service';
-import { LoginFormData } from 'src/types/auth';
+import { LoginFormData } from 'src/models/auth';
 import PhInputPassword from 'src/components/auth/PhInputPassword.vue';
 
 import { useQuasar } from 'quasar';

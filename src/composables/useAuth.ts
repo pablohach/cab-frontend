@@ -6,7 +6,7 @@ import {
   AuthLogoutKey,
   AuthAuthorizeKey,
 } from '../types/symbols';
-import { LoginFormData, SystemConfig } from '../types/auth';
+import { LoginFormData, SystemConfig } from '../models/auth';
 
 export default function () {
   const authState = inject(AuthStateKey);
