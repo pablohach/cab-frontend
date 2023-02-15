@@ -11,11 +11,11 @@
 
     <div class="row items-center">
       <!-- Filter Simple -->
-      <ph-filter-simple
+      <ph-crud-filter-simple
         :filters="simpleFilters"
         @change="onChangeFilter"
         class="col-xs-6 col-sm-6 col-md-5 col-lg-3 q-mr-xs"
-      ></ph-filter-simple>
+      ></ph-crud-filter-simple>
 
       <!-- Botones -->
       <q-btn
@@ -26,16 +26,16 @@
       ></q-btn>
     </div>
 
-    <ph-data-table
+    <ph-crud-data-table
       class="row q-mt-xs"
       :columns="(columns as any)"
       :rows="(roles as any)"
       :loading="fetchLoading"
       @onRequest="onRequest"
-      @onRowSelect="setCurrentRole"
+      @onRowSelect="setCurrent"
       :grid="$q.screen.lt.sm"
       :paginationData="paginationInfo"
-    ></ph-data-table>
+    ></ph-crud-data-table>
 
     <role-view
       ref="roleViewRef"
@@ -56,8 +56,8 @@ import useUtils from 'src/composables/useUtils';
 import roleDataService from 'src/services/role.dataService';
 import { PaginationData, SimpleFilter } from 'src/models/crud';
 import { Role } from 'src/models/auth';
-import PhFilterSimple from 'src/components/crud/PhFilterSimple.vue';
-import PhDataTable from 'src/components/crud/PhDataTable.vue';
+import PhCrudFilterSimple from 'src/components/crud/PhCrudFilterSimple.vue';
+import PhCrudDataTable from 'src/components/crud/PhCrudDataTable.vue';
 import RoleView from './RoleView.vue';
 
 const { hasPermission } = useAuth();
@@ -90,7 +90,7 @@ const columns = [
     field: 'id',
     label: '',
     sortable: true,
-    style: 'width: 50px',
+    style: 'width: 70px',
   },
   {
     name: 'name',
@@ -101,7 +101,7 @@ const columns = [
   },
 ];
 
-const setCurrentRole = (index: number, role: Role) => {
+const setCurrent = (index: number, role: Role) => {
   setCurrentIndex(index);
   roleViewRef.value?.openView(role.id);
 };

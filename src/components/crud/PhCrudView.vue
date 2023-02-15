@@ -45,6 +45,7 @@
           <q-btn
             outline
             icon="delete"
+            text-color="warning"
             v-if="canDelete"
             v-show="crudMode === CrudModeEnum.VIEW"
             @click="btnDeleteClick"

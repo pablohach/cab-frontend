@@ -14,6 +14,12 @@
     <template v-slot:loading>
       <q-inner-loading showing color="primary" />
     </template>
+
+    <template v-slot:body-cell-isActive="props">
+      <q-td :props="props">
+        <q-icon :name="!!props.value ? 'done' : ''"></q-icon>
+      </q-td>
+    </template>
   </q-table>
 </template>
 
@@ -39,7 +45,7 @@ const emit = defineEmits(['onRowSelect', 'onRowDblClick', 'onRequest']);
 const tableRef = ref();
 
 const pagination = ref({
-  sortBy: 'id',
+  sortBy: '',
   descending: false,
   page: 0,
   rowsPerPage: 0,
