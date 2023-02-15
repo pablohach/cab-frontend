@@ -36,6 +36,15 @@
       :grid="$q.screen.lt.sm"
       :paginationData="paginationInfo"
     ></ph-data-table>
+
+    <role-view
+      ref="roleViewRef"
+      @onUpdate="onUpdate"
+      @onCreate="onCreate"
+      @onDelete="onDelete"
+      :vRoles="roles"
+    >
+    </role-view>
   </q-page>
 </template>
 
@@ -49,6 +58,7 @@ import { PaginationData, SimpleFilter } from 'src/models/crud';
 import { Role } from 'src/models/auth';
 import PhFilterSimple from 'src/components/crud/PhFilterSimple.vue';
 import PhDataTable from 'src/components/crud/PhDataTable.vue';
+import RoleView from './RoleView.vue';
 
 const { hasPermission } = useAuth();
 const { getPaginationQueryString } = useUtils();
@@ -63,6 +73,7 @@ const {
 
 const roles = ref<Role[]>([]);
 const currentIndex = ref<number | null>(null);
+const roleViewRef = ref();
 const paginationInfo = ref<PaginationData>({
   sortBy: 'id',
   descending: false,
@@ -91,14 +102,13 @@ const columns = [
 ];
 
 const setCurrentRole = (index: number, role: Role) => {
-  console.log(index, role);
   setCurrentIndex(index);
-  //  roleViewRef.value?.doShowRoleView(role.id);
+  roleViewRef.value?.openView(role.id);
 };
 
 const addRole = () => {
   setCurrentIndex(null);
-  //roleViewRef.value?.doShowRoleView(0);
+  roleViewRef.value?.openView(0);
 };
 
 const getFilters = () => {
@@ -163,11 +173,18 @@ const onUpdate = (role: Role) => {
 const onCreate = (role: Role) => {
   roles.value.push(role);
   setCurrentIndex(roles.value.length - 1);
+  if (paginationInfo.value) {
+    paginationInfo.value.total += 1;
+  }
 };
 
 const onDelete = (id: number) => {
-  if (currentIndex.value !== null) roles.value.splice(currentIndex.value, 1);
+  if (currentIndex.value !== null && roles.value[currentIndex.value].id == id)
+    roles.value.splice(currentIndex.value, 1);
   setCurrentIndex(null);
+  if (paginationInfo.value) {
+    paginationInfo.value.total -= 1;
+  }
 };
 
 const setCurrentIndex = (index: number | null) => {

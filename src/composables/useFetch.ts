@@ -26,7 +26,7 @@ export default function (base_url: string, base_config = {}) {
 
   const errorDetails = computed(() => {
     let e = '';
-    if (error.value && error.value.response) {
+    if (error.value?.response) {
       e = error.value.response.data?.message;
     }
     return e;

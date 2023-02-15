@@ -24,27 +24,3 @@ $positive: #21ba45;
 $negative: tomato;
 $info: #31ccec;
 $warning: #f9b808;
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin: 0;
-}
-
-.alert-danger {
-  color: white;
-  background-color: $negative;
-}
-
-.alert-warning {
-  color: black;
-  background-color: $warning;
-}
-
-.alert-info {
-  color: black;
-  background-color: $info;
-}
