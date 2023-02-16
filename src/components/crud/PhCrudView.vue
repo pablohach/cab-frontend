@@ -1,11 +1,11 @@
 <template>
-  <q-dialog v-model="showModal">
+  <q-dialog v-model="showModal" no-backdrop-dismiss>
     <q-card :style="cardStyle">
       <q-card-section class="row items-center q-pb-none">
         <div class="text-h6" v-if="title">{{ title }}</div>
         <q-space />
 
-        <q-btn-group push>
+        <q-btn-group push class="q-mr-sm">
           <!-- Add Btn -->
           <q-btn
             outline

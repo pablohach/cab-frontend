@@ -27,6 +27,7 @@
         emit-value
         map-options
         multiple
+        use-chips
         :options="
           roles.map((item) => ({
             label: item.name,

@@ -8,11 +8,14 @@
       :modelValue="modelValue"
       :value="modelValue"
       @update:modelValue="(newValue) => $emit('update:modelValue', newValue)"
-      :rules="[
-        showPasswordCriteria
-          ? (val) => validatePassword(val) || 'La clave debe cumplir todos los criterios.'
-          : (val) => (val && val.length > 0) || 'Dato requerido.',
-      ]"
+      :rules="
+        rules || [
+          showPasswordCriteria
+            ? (val) =>
+                validatePassword(val) || 'La clave debe cumplir todos los criterios.'
+            : (val) => (val && val.length > 0) || 'Dato requerido.',
+        ]
+      "
     >
       <template v-slot:append>
         <q-icon
@@ -59,7 +62,7 @@
 
 <script setup lang="ts">
 import { ref, reactive } from 'vue';
-import { QInput } from 'quasar';
+import { QInput, ValidationRule } from 'quasar';
 
 defineEmits(['update:modelValue']);
 
@@ -68,12 +71,14 @@ interface Props {
   label?: string;
   showPasswordCriteria?: boolean;
   minPasswordLength?: number;
+  rules?: ValidationRule[] | null;
 }
 
 const prop = withDefaults(defineProps<Props>(), {
   label: 'Clave acceso *',
   showPasswordCriteria: false,
   minPasswordLength: 8,
+  rules: null,
 });
 
 const isPwd = ref(true);
@@ -118,7 +123,12 @@ const focus = () => {
   passRef.value?.focus();
 };
 
+const validate = () => {
+  return passRef.value?.validate();
+};
+
 defineExpose({
   focus,
+  validate,
 });
 </script>

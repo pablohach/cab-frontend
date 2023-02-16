@@ -7,7 +7,7 @@
       class="alert-danger q-ma-sm"
       >{{ fetchErrorMessage || fetchErrorDetails }}</q-banner
     >
-    <h6>Roles</h6>
+    <h6>Usuarios</h6>
 
     <div class="row items-center">
       <!-- Filter Simple -->
@@ -51,14 +51,14 @@
     <!-- User Filter -->
     <user-filters ref="userFilterRef" @onFilterChange="getData"></user-filters>
 
-    <role-view
-      ref="roleViewRef"
+    <user-view
+      ref="userViewRef"
       @onUpdate="onUpdate"
       @onCreate="onCreate"
       @onDelete="onDelete"
       :vRoles="roles"
     >
-    </role-view>
+    </user-view>
   </q-page>
 </template>
 
@@ -74,7 +74,7 @@ import PhCrudFilterSimple from 'src/components/crud/PhCrudFilterSimple.vue';
 import PhCrudDataTable from 'src/components/crud/PhCrudDataTable.vue';
 
 import UserFilters from './UserFilters.vue';
-import RoleView from './RoleView.vue';
+import UserView from './UserView.vue';
 
 const { hasPermission } = useAuth();
 const { getPaginationQueryString } = useUtils();

@@ -49,7 +49,6 @@
                 label="Nombre *"
                 class="col"
                 outlined
-                dense
                 autofocus
                 v-model="model.name"
                 :readonly="readOnly"
@@ -59,7 +58,17 @@
             </div>
           </q-form>
         </q-tab-panel>
-        <q-tab-panel name="permissions"> ACA PERMISOS </q-tab-panel>
+        <q-tab-panel name="permissions">
+          <ph-permissions-tree
+            ref="treeRef"
+            kind="role"
+            :itemId="model.id || -1"
+            :canEdit="
+              crudMode === CrudModeEnum.VIEW &&
+              hasPermission(PermissionsEnum.ROLES_PERMISSIONS_EDIT)
+            "
+          ></ph-permissions-tree>
+        </q-tab-panel>
       </q-tab-panels>
     </template>
   </PhCrudView>
@@ -73,6 +82,7 @@ import { Role } from 'src/models/auth';
 import useAuth from 'src/composables/useAuth';
 import useUtils from 'src/composables/useUtils';
 import roleDataService from 'src/services/role.dataService';
+import PhPermissionsTree from '../auth/PhPermissionsTree.vue';
 
 const emit = defineEmits(['onUpdate', 'onCreate', 'onDelete']);
 const {
@@ -142,7 +152,6 @@ const onBtnCancel = () => {
 };
 
 const onBtnSave = () => {
-  console.log('save');
   errorRole.value = '';
   formRef.value?.resetValidation();
   formRef.value?.validate().then((success: boolean) => {
@@ -193,7 +202,8 @@ const openView = (id: number) => {
   errorRole.value = '';
   crudMode.value = id ? CrudModeEnum.VIEW : CrudModeEnum.NEW;
   // Limpio datos
-  setCurrent(null);
+  clearCurrent();
+  formRef.value?.resetValidation();
   tabSelected.value = 'data';
   viewRef.value.openModal();
   if (id) {

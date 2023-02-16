@@ -49,7 +49,14 @@
               </q-list>
             </q-tab-panel>
 
-            <q-tab-panel name="permissions"> ACA PERMISOS </q-tab-panel>
+            <q-tab-panel name="permissions">
+              <ph-permissions-tree
+                kind="user"
+                :itemId="userID"
+                :isUserAdmin="isAdmin"
+                :canEdit="false"
+              ></ph-permissions-tree>
+            </q-tab-panel>
           </q-tab-panels>
         </template>
       </q-splitter>
@@ -58,13 +65,36 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, computed, onBeforeMount, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import useAuth from '../../composables/useAuth';
+import { RolesEnum } from 'src/enums';
+import PhPermissionsTree from 'src/components/auth/PhPermissionsTree.vue';
+
 const tab = ref('data');
 const splitterModel = ref(15);
 const { currentUser, logout } = useAuth();
 const router = useRouter();
+const mounted = ref(false);
+
+const userID = computed(() => {
+  // para que cambie userID al llamar al tree, sino no se cargan los datos
+  return mounted.value ? currentUser.value?.id_usuario : 0;
+});
+
+const isAdmin = computed(() => {
+  return !!currentUser?.value?.roles_code?.find((role) => role === RolesEnum.ADMIN);
+});
+
+onBeforeMount(() => {
+  if (!currentUser?.value) {
+    router.push({ name: 'Login' });
+  }
+});
+
+onMounted(() => {
+  mounted.value = true;
+});
 
 const doLogout = () => {
   logout();
