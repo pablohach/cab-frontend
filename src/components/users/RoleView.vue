@@ -62,7 +62,7 @@
           <ph-permissions-tree
             ref="treeRef"
             kind="role"
-            :itemId="model.id || -1"
+            :kindId="model.id || -1"
             :canEdit="
               crudMode === CrudModeEnum.VIEW &&
               hasPermission(PermissionsEnum.ROLES_PERMISSIONS_EDIT)

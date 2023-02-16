@@ -1,4 +1,4 @@
-import useFetch from "../composables/useFetch";
+import useFetch from '../composables/useFetch';
 
 export default function () {
   const {
@@ -10,91 +10,91 @@ export default function () {
     fetchErrorDetails,
     fetchErrorFields,
     fetch,
-  } = useFetch("users/");
+  } = useFetch('users/');
 
-  const getAll = (querystr = "") => {
+  const getAll = (querystr = '') => {
     return fetch(querystr, {
-      method: "get",
+      method: 'get',
     });
   };
 
   const get = (id: number) => {
     return fetch(id.toString(), {
-      method: "get",
+      method: 'get',
     });
   };
 
   const update = (id: number, data: any) => {
     return fetch(id.toString(), {
-      method: "put",
+      method: 'put',
       data: data,
     });
   };
 
   const create = (data: any) => {
-    return fetch("", {
-      method: "post",
+    return fetch('', {
+      method: 'post',
       data: data,
     });
   };
 
   const remove = (id: number) => {
     return fetch(id.toString(), {
-      method: "delete",
+      method: 'delete',
     });
   };
 
-  const getRoles = (querystr = "") => {
+  const getRoles = (querystr = '') => {
     return fetch(
       querystr,
       {
-        method: "get",
+        method: 'get',
       },
-      "roles/"
+      'roles/'
     );
   };
 
-  const getPermissions = (querystr = "") => {
+  const getPermissions = (querystr = '') => {
     return fetch(
       querystr,
       {
-        method: "get",
+        method: 'get',
       },
-      "permissions/"
+      'permissions/'
     );
   };
 
   const getUserPermissions = (id: number) => {
-    return fetch(id + "/permissions", {
-      method: "get",
+    return fetch(id + '/permissions', {
+      method: 'get',
     });
   };
 
   const saveUserPermissions = (id: number, data: any) => {
-    return fetch(id + "/permissions", {
-      method: "put",
+    return fetch(id + '/permissions', {
+      method: 'put',
       data: data,
     });
   };
 
   const getRolePermissions = (role_id: number) => {
     return fetch(
-      role_id + "/permissions",
+      role_id + '/permissions',
       {
-        method: "get",
+        method: 'get',
       },
-      "roles/"
+      'roles/'
     );
   };
 
   const saveRolePermissions = (id: number, data: any) => {
     return fetch(
-      id + "/permissions",
+      id + '/permissions',
       {
-        method: "put",
+        method: 'put',
         data: data,
       },
-      "roles/"
+      'roles/'
     );
   };
 

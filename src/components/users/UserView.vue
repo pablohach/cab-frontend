@@ -139,7 +139,7 @@
           <ph-permissions-tree
             ref="permissionsTreeRef"
             kind="user"
-            :itemId="model.id_usuario"
+            :kindId="model.id_usuario"
             :isUserAdmin="isAdmin"
             :vRoles="vRoles"
             :canEdit="

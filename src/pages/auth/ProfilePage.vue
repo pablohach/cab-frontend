@@ -52,7 +52,7 @@
             <q-tab-panel name="permissions">
               <ph-permissions-tree
                 kind="user"
-                :itemId="userID"
+                :kindId="userID"
                 :isUserAdmin="isAdmin"
                 :canEdit="false"
               ></ph-permissions-tree>

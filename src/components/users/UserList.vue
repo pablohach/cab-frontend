@@ -14,7 +14,7 @@
       <ph-crud-filter-simple
         :filters="simpleFilters"
         @change="onChangeFilter"
-        class="col-xs-6 col-sm-6 col-md-5 col-lg-3 q-mr-xs"
+        class="col-xs-6 col-sm-6 q-mr-xs"
       ></ph-crud-filter-simple>
 
       <!-- Botones -->

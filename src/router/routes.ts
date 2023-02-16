@@ -1,5 +1,5 @@
 import { RouteRecordRaw } from 'vue-router';
-import { RolesEnum, PermissionsEnum } from '../enums';
+import { PermissionsEnum } from '../enums';
 
 const routes: RouteRecordRaw[] = [
 
