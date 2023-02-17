@@ -42,11 +42,15 @@
             </q-tab-panel>
 
             <q-tab-panel name="roles">
-              <q-list separator>
-                <q-item v-for="role in currentUser?.roles" :key="role.id" v-ripple>
-                  <q-item-section>{{ role }}</q-item-section>
-                </q-item>
-              </q-list>
+              <q-chip
+                v-for="role in currentUser?.roles"
+                :key="role.id"
+                outline
+                size="xl"
+                icon="badge"
+              >
+                {{ role }}
+              </q-chip>
             </q-tab-panel>
 
             <q-tab-panel name="permissions">

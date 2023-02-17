@@ -149,12 +149,18 @@ const errorPermissions = ref('');
 const loadedPermissions = ref<Permission[]>([]);
 
 const currentRole = ref(0);
+
 const itemId = computed(() => {
   return ['user', 'role'].includes(props.kind) ? props.kindId : 0;
 });
 
 const isRoleAdmin = computed(() => {
-  return props.isUserAdmin || (props.kind == 'role' && props.kindId == RolesEnum.ADMIN);
+  return (
+    props.isUserAdmin ||
+    (props.kind == 'role' && props.kindId == RolesEnum.ADMIN) ||
+    (props.kind == 'role' && !itemId.value && currentRole.value == RolesEnum.ADMIN) ||
+    (props.kind == 'perm' && currentRole.value == RolesEnum.ADMIN)
+  );
 });
 
 const loadPermissions = () => {
@@ -207,7 +213,7 @@ watch(itemId, (value) => {
 });
 
 watch(currentRole, (value) => {
-  console.log('watch currentRole', itemId.value);
+  console.log('watch currentRole', value);
   // si pasaron un rol se dispara en el watch de itemId, ya que ahi seteo currentRole
   if (!itemId.value) {
     treeData.value = [];
