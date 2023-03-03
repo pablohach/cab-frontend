@@ -42,7 +42,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import userDataService from 'src/services/user.dataService';
 import useUtils from 'src/composables/useUtils';
 import { Role } from 'src/models/auth';
@@ -57,6 +57,14 @@ const {
   fetchErrorDetails,
   getRoles,
 } = userDataService();
+
+interface Props {
+  isActive?: 0 | 1 | null;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  isActive: 1,
+});
 
 interface CompexFilter {
   isActive: 0 | 1 | null;
@@ -77,6 +85,14 @@ const emptyComplexFilter = {
 
 const { deepCopy } = useUtils();
 const currentComplexFilter = ref(deepCopy(emptyComplexFilter));
+
+onMounted(() => {
+  currentComplexFilter.value.model.state = '0';
+  if (props.isActive !== null) {
+    currentComplexFilter.value.model.state = props.isActive == 1 ? '1' : '2';
+  }
+  currentComplexFilter.value.filter.state = currentComplexFilter.value.model.state;
+});
 
 const setRoles = (data: Role[] | null) => {
   if (!data) loadRoles();
