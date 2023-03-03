@@ -12,9 +12,9 @@
         emit-value
         map-options
         :options="[
-          { label: 'Todos', value: '0' },
-          { label: 'Activos', value: '1' },
-          { label: 'Inactivos', value: '2' },
+          { label: 'Todos', value: undefined },
+          { label: 'Activos', value: true },
+          { label: 'Inactivos', value: false },
         ]"
         outlined
         item-aligned
@@ -72,25 +72,28 @@ interface CompexFilter {
 }
 
 interface ComplexFilterItem {
-  state: '0' | '1' | '2';
+  //state: '0' | '1' | '2';
+  state: false | true | undefined;
   roles: number[];
 }
 
 const roles = ref<Role[]>([]);
 
 const emptyComplexFilter = {
-  model: { state: '0', roles: [] } as ComplexFilterItem, // usado en v-model
-  filter: { state: '0', roles: [] } as ComplexFilterItem, // usado para filtrar, se copian aca al aceptar el filtrado
+  model: { state: undefined, roles: [] } as ComplexFilterItem, // usado en v-model
+  filter: { state: undefined, roles: [] } as ComplexFilterItem, // usado para filtrar, se copian aca al aceptar el filtrado
 };
 
 const { deepCopy } = useUtils();
 const currentComplexFilter = ref(deepCopy(emptyComplexFilter));
 
 onMounted(() => {
-  currentComplexFilter.value.model.state = '0';
-  if (props.isActive !== undefined) {
-    currentComplexFilter.value.model.state = props.isActive ? '1' : '2';
-  }
+  currentComplexFilter.value.model.state = props.isActive;
+
+  // currentComplexFilter.value.model.state = '0';
+  // if (props.isActive !== undefined) {
+  //   currentComplexFilter.value.model.state = props.isActive ? '1' : '2';
+  // }
   currentComplexFilter.value.filter.state = currentComplexFilter.value.model.state;
 });
 
@@ -133,15 +136,16 @@ const onFilterComplexCancel = () => {
 
 const hasComplexFilter = computed(() => {
   return (
-    currentComplexFilter.value.filter.state !== '0' ||
+    currentComplexFilter.value.filter.state !== undefined ||
     currentComplexFilter.value.filter.roles?.length
   );
 });
 
 const getComplexFilters = (): CompexFilter => {
   let ret: CompexFilter = { isActive: null, filter_roles: null };
-  if (currentComplexFilter.value.filter.state !== '0') {
-    ret.isActive = currentComplexFilter.value.filter.state === '1' ? 1 : 0;
+  if (currentComplexFilter.value.filter.state !== undefined) {
+    //ret.isActive = currentComplexFilter.value.filter.state === '1' ? 1 : 0;
+    ret.isActive = currentComplexFilter.value.filter.state ? 1 : 0;
   }
   if (currentComplexFilter.value.filter.roles?.length) {
     ret.filter_roles = currentComplexFilter.value.filter.roles;
