@@ -3,7 +3,9 @@
     ref="viewRef"
     maximized
     :crudMode="crudMode"
-    :title="'Usuario ' + (model.id_usuario ? ' ' + model.id_usuario : '')"
+    :title="
+      'Usuario ' + (model.id_usuario ? ' ' + model.id_usuario + ' - ' + model.login : '')
+    "
     :loading="fetchLoading"
     confirmDeleteText="Desea borrar el usuario?"
     :canEdit="hasPermission(PermissionsEnum.USERS_EDIT) && !fetchLoading"

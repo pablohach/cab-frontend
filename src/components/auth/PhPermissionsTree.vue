@@ -352,9 +352,9 @@ const btnSaveClick = () => {
   if (props.kind === 'user' && itemId.value > 0) {
     fnSave = saveUserPermissions;
     id = itemId.value;
-  } else if (props.kind === 'role' && currentRole.value > 0) {
+  } else if (props.kind === 'role' && (currentRole.value > 0 || itemId.value > 0)) {
     fnSave = saveRolePermissions;
-    id = currentRole.value;
+    id = currentRole.value || itemId.value;
   }
 
   if (fnSave && id) {

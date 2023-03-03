@@ -2,7 +2,7 @@
   <PhCrudView
     ref="viewRef"
     :crudMode="crudMode"
-    :title="'Rol ' + (model.id ? ' ' + model.id : '')"
+    :title="'Rol ' + (model.id ? ' ' + model.id + ' - ' + model.name : '')"
     :loading="fetchLoading"
     confirmDeleteText="Desea borrar el rol?"
     :canEdit="

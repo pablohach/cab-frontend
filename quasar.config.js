@@ -90,7 +90,7 @@ module.exports = configure(function (ctx) {
         API_URL_VERSION: 'api/v1.0/',
         API_URL: ctx.dev
           ? 'http://localhost:8888/'
-          : 'https://www.piedrasblancasbariloche.ar/',
+          : 'http://www.clubandino.com.ar:8888/',
       },
     },
 
