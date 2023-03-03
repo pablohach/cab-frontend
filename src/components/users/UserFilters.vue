@@ -59,11 +59,11 @@ const {
 } = userDataService();
 
 interface Props {
-  isActive?: 0 | 1 | null;
+  isActive?: false | true | undefined;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  isActive: 1,
+  isActive: true,
 });
 
 interface CompexFilter {
@@ -88,8 +88,8 @@ const currentComplexFilter = ref(deepCopy(emptyComplexFilter));
 
 onMounted(() => {
   currentComplexFilter.value.model.state = '0';
-  if (props.isActive !== null) {
-    currentComplexFilter.value.model.state = props.isActive == 1 ? '1' : '2';
+  if (props.isActive !== undefined) {
+    currentComplexFilter.value.model.state = props.isActive ? '1' : '2';
   }
   currentComplexFilter.value.filter.state = currentComplexFilter.value.model.state;
 });
