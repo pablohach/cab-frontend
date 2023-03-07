@@ -112,7 +112,6 @@ export default function () {
   const loggedIn = () => {
     // Retorna user ID si hay token y no expiró
     const token = getTokenDecoded();
-    console.log(token);
     if (token?.exp && token.exp < Date.now()) {
       //return token.exp < Date.now();
       return parseInt(token.sub || 0);

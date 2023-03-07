@@ -2,7 +2,7 @@
   <q-list>
     <q-item-label header> Menú </q-item-label>
 
-    <MenuItem v-for="item in menuItems" :key="item.title" v-bind="item" />
+    <MenuItem v-for="(item, index) in menuItems" :key="index" v-bind="item" />
   </q-list>
 </template>
 
