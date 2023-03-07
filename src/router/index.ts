@@ -9,8 +9,6 @@ import {
 import routes from './routes';
 import useLocalStorage from '../composables/useLocalStorage';
 
-
-
 /*
  * If not building with SSR mode, you can
  * directly export the Router instantiation;
@@ -38,10 +36,11 @@ export default route(function (/* { store, ssrContext } */) {
 
   Router.beforeEach((to, from, next) => {
     // Saco permisos y roles de LocalStorage, ya que acá no puedo injectar auth para obtener urrentUser
-    const { loggedIn, hasRole, hasPermission } = useLocalStorage();
-    if (to.meta.requiresPermission || to.meta.requiresRole) {
+    const { loggedIn, hasRole, hasPermission, } = useLocalStorage();
+    if (to.meta.requiresPermission || to.meta.requiresRole || to.meta.requiresUserID) {
       to.meta.requiresAuth = true;
     }
+
 
     // No está logeado y es una ruta protegida...
     if (to.meta.requiresAuth && !loggedIn())
@@ -50,14 +49,17 @@ export default route(function (/* { store, ssrContext } */) {
     else if ((to.name == 'Login' || to.name == 'ResetPass') && loggedIn())
       next({ name: 'Profile' });
     else if (
-      to.meta.requiresPermission &&
-      !hasPermission(to.meta.requiresPermission)
+      to.meta.requiresPermission && !hasPermission(to.meta.requiresPermission)
     )
       next({ name: 'Unauthorized' });
     else if (to.meta.requiresRole && !hasRole(to.meta.requiresRole))
       next({ name: 'Unauthorized' });
-    // Continuamos..
-    else next();
+    else if (to.meta.requiresUserID && loggedIn() != to.meta.requiresUserID)
+      next({ name: 'Unauthorized' });
+    else
+      next();
+
+
   });
 
 

@@ -110,12 +110,14 @@ export default function () {
   };
 
   const loggedIn = () => {
-    // Retorna true si hay token y no expiró
+    // Retorna user ID si hay token y no expiró
     const token = getTokenDecoded();
-    if (token?.exp) {
-      return token.exp < Date.now();
+    console.log(token);
+    if (token?.exp && token.exp < Date.now()) {
+      //return token.exp < Date.now();
+      return parseInt(token.sub || 0);
     }
-    return false;
+    return 0;
   };
 
   const hasRole = (roles: number | number[] | unknown) => {

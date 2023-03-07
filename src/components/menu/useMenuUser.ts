@@ -1,5 +1,5 @@
 import { computed } from 'vue';
-import useAuth from '../../composables/useAuth';
+import useAuth from 'src/composables/useAuth';
 import { useRouter } from 'vue-router';
 import { MenuItemProps } from './MenuItem.vue';
 

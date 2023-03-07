@@ -63,17 +63,31 @@ const routes: RouteRecordRaw[] = [
         meta: { requiresPermission: PermissionsEnum.ROLES_VIEW },
       },
 
-
+      // TEST
+      {
+        path: '/test',
+        name: 'TestPage',
+        component: () => import('../pages/TestPage.vue'),
+        meta: { requiresUserID: 1 },
+      },
 
     ],
   },
+
+
+  {
+    path: '/unauthorized',
+    name: 'Unauthorized',
+    component: () => import('pages/errors/UnauthorizedPage.vue'),
+  },
+
 
   // Always leave this as last one,
   // but you can also remove it
   {
     path: '/:catchAll(.*)*',
     name: 'Notfound',
-    component: () => import('pages/ErrorNotFound.vue'),
+    component: () => import('src/pages/errors/ErrorNotFoundPage.vue'),
   },
 ];
 
